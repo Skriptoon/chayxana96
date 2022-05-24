@@ -1,0 +1,21 @@
+body {
+	background: url("../img/pan-bg-body.jpg");
+}
+/*
+.container-body {
+	background: url("../img/1.png");
+    padding: 0 30px;
+}
+.menu-body {
+	background: url("../img/2.png") repeat-x;
+}*/
+
+.bg-main {
+	background: #ffc9bb;
+}
+
+.btn-main {
+	color: #fff;
+    background-color: #dc3545;
+    border-color: #dc3545;
+}

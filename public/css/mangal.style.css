@@ -1,0 +1,25 @@
+body {
+	background: url("../img/man-bg-body.jpg");
+}
+
+.bg-main {
+	background: #000;
+}
+
+.btn-main {
+	color: #fff;
+    background-color: #dc3545;
+    border-color: #dc3545;
+}
+
+nav.bg-main {
+	background: #fff;
+}
+
+.pr-info {
+	color: #fff;
+}
+
+.nav-link {
+	color: #fff;
+}

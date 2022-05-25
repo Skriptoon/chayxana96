@@ -23,6 +23,17 @@ Route::get('/', function() {
     return view('home', ['positions' => $position->getModel()->get()]);
 })->name('home');
 
+Route::get('/cart', function() {
+    $position = new PositionController();
+    $positions =array();
+    $positions = [];
+    foreach(session('positions') as $posId => $val) {
+        if($val)
+            $positions[] = $posId;
+    }
+    return view('cart', ['positions' => $position->getModel()->whereIn('menu__positions.id', $positions)->get()]);
+})->name('cart');
+
 Route::get('/delivery', function() {
     return view('delivery');
 })->name('delivery');
@@ -57,5 +68,5 @@ Route::get('/{menu}', function($menu) {
             $menuId = 3;
             break;
     };
-    return view('menu', ['positions' => $position->getModel()->where('menu', $menuId)->get(), 'categories' => $category->getModel()->where('menu', $menuId)->get()]);
+    return view('menu', ['positions' => $position->getModel()->get(), 'categories' => $category->getModel()->where('menu', $menuId)->get()]);
 });

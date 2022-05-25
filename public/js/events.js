@@ -19,9 +19,19 @@ $("body").on("click", ".btn-inbusket", function() {
 
 $("body").on("click", ".btn-minus", function() {
 	if(prParam[Number($(this).attr("id"))]["amount"] == 1) {
-		$(this).parent().html('<button class="btn btn-main btn-inbusket" id="' + Number($(this).attr("id")) + '">В корзину</button>');
+		if($(this).hasClass('cart')) {
+			$("#" + $(this).attr("id") +".cart-info").remove();
+		} else {
+			$(this).parent().html('<button class="btn btn-main btn-inbusket" id="' + Number($(this).attr("id")) + '">В корзину</button>');
+		}
+		
 	} else {
-		$("#" + $(this).attr("id") +".pr-amount").html(prParam[Number($(this).attr("id"))]["amount"] - 1);
+		if($(this).hasClass('cart')) {
+			$("#" + $(this).attr("id") +".pr-amount").html(prParam[Number($(this).attr("id"))]["amount"] - 1);
+			$("#" + $(this).attr("id") +".pr-price").html((prParam[Number($(this).attr("id"))]["amount"] - 1) * prParam[Number($(this).attr("id"))]["price"] + "&#8381;");
+		} else {
+			$("#" + $(this).attr("id") +".pr-amount").html(prParam[Number($(this).attr("id"))]["amount"] - 1);
+		}
 	}
 	prParam[Number($(this).attr("id"))]["amount"]--
 	$.ajax({
@@ -33,12 +43,21 @@ $("body").on("click", ".btn-minus", function() {
 			'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
 		}
 	});
-	updateCart();
+	if($(this).hasClass('cart')) {
+		updateSum();
+	} else {
+		updateCart();
+	}
 });
 
 $("body").on("click", ".btn-plus", function() {
 	prParam[Number($(this).attr("id"))]["amount"]++
-	$("#" + $(this).attr("id") +".pr-amount").html(prParam[Number($(this).attr("id"))]["amount"]);
+	if($(this).hasClass('cart')) {
+		$("#" + $(this).attr("id") +".pr-amount").html(prParam[Number($(this).attr("id"))]["amount"]);
+		$("#" + $(this).attr("id") +".pr-price").html(prParam[Number($(this).attr("id"))]["amount"] * prParam[Number($(this).attr("id"))]["price"] + "&#8381;");
+	} else {
+		$("#" + $(this).attr("id") +".pr-amount").html(prParam[Number($(this).attr("id"))]["amount"]);
+	}
 	$.ajax({
 		url: "/ajax/session/set",
 		type: "POST",
@@ -48,37 +67,12 @@ $("body").on("click", ".btn-plus", function() {
 			'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
 		}
 	});
-	updateCart();
-});
-
-$("body").on("click", ".btn-minus-cart", function() {
-	if(prParam[Number($(this).attr("id"))]["amount"] == 1) {
-		$("#" + $(this).attr("id") +".cart-info").remove();
+	
+	if($(this).hasClass('cart')) {
+		updateSum();
 	} else {
-		$("#" + $(this).attr("id") +".pr-amount").html(prParam[Number($(this).attr("id"))]["amount"] - 1);
-		$("#" + $(this).attr("id") +".pr-price").html((prParam[Number($(this).attr("id"))]["amount"] - 1) * prParam[Number($(this).attr("id"))]["price"] + "&#8381;");
+		updateCart();
 	}
-	prParam[Number($(this).attr("id"))]["amount"]--
-	$.ajax({
-		url: "./ajax/amount.php",
-		type: "POST",
-		data: "amount=" + prParam[Number($(this).attr("id"))]["amount"] + "&id=" + Number($(this).attr("id")),
-		cache: false
-	});
-	updateSum();
-});
-
-$("body").on("click", ".btn-plus-cart", function() {
-	prParam[Number($(this).attr("id"))]["amount"]++
-	$("#" + $(this).attr("id") +".pr-amount").html(prParam[Number($(this).attr("id"))]["amount"]);
-	$("#" + $(this).attr("id") +".pr-price").html(prParam[Number($(this).attr("id"))]["amount"] * prParam[Number($(this).attr("id"))]["price"] + "&#8381;");
-	$.ajax({
-		url: "./ajax/amount.php",
-		type: "POST",
-		data: "amount=" + prParam[Number($(this).attr("id"))]["amount"] + "&id=" + Number($(this).attr("id")),
-		cache: false
-	});
-	updateSum();
 });
 
 $.mask.definitions['h'] = "[0|1|3|4|5|6|7|9]"

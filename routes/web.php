@@ -20,8 +20,12 @@ use Illuminate\Http\Request;
 
 Route::get('/', function() {
     $position = new PositionController();
-    return view('home', ['positions' => $position->get()]);
-});
+    return view('home', ['positions' => $position->getModel()->get()]);
+})->name('home');
+
+Route::get('/delivery', function() {
+    return view('delivery');
+})->name('delivery');
 
 Route::get('/contacts', function() {
     return view('contacts');
@@ -53,5 +57,5 @@ Route::get('/{menu}', function($menu) {
             $menuId = 3;
             break;
     };
-    return view('menu', ['positions' => $position->get($menuId), 'categories' => $category->get($menuId)]);
+    return view('menu', ['positions' => $position->getModel()->where('menu', $menuId)->get(), 'categories' => $category->getModel()->where('menu', $menuId)->get()]);
 });

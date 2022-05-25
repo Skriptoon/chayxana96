@@ -46,18 +46,19 @@
 	@foreach($positions as $position)
 		@if($position->id_category == $category->id)
 			@include('layouts.carts.menu-cart')
-			<script>
-			if(!prParam) var prParam = [];
-			prParam[{{$position->id}}] = {
-				price: {{$position->price}},
-				amount: @if(isset(session('positions')[$position->id]))
-						{{ session('positions')[$position->id] }} 
-					@else
-						0
-					@endif
-			}
-			</script>
+			
 		@endif
+		<script>
+		if(!prParam) var prParam = [];
+		prParam[{{$position->id}}] = {
+			price: {{$position->price}},
+			amount: @if(isset(session('positions')[$position->id]))
+					{{ session('positions')[$position->id] }} 
+				@else
+					0
+				@endif
+		}
+		</script>
 	@endforeach
 	</div>
 @endforeach

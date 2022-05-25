@@ -22,7 +22,7 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('chayhana') }}">
+                        <a class="nav-link" href="/chayhana">
                             <img src="./img/logo.png" alt="">
                         </a>
                     </li>
@@ -43,7 +43,9 @@
                         <div>+7 (906) 855‒90‒37</div>
                     </div>
                 </span>
-                <a class="btn btn-dark btn-busket d-none d-lg-block" href="./cart">Корзина</a>
+                @if(Request::is('/'))
+                    <a class="btn btn-dark btn-busket d-none d-lg-block" href="./cart">Корзина</a>
+                @endif
             </div>
         </div>
     </nav>

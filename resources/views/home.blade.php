@@ -82,8 +82,8 @@
         @endforeach
         
         <div class="py-4 d-flex justify-content-between">
-            <a href="/chaihana" class="fs-3 text-decoration-none text-dark fw-bold">Чайхана#96</a>
-            <a href="/chaihana" class="btn btn-dark align-top">В меню</a>
+            <a href="/chayhana" class="fs-3 text-decoration-none text-dark fw-bold">Чайхана#96</a>
+            <a href="/chayhana" class="btn btn-dark align-top">В меню</a>
         </div>
         <div class="owl-carousel owl-theme">
             @foreach($positions as $position)
@@ -137,4 +137,5 @@
     </div>
     <script>updateCart()</script>
     <script src="/js/events.js"></script>
+    <a class="btn btn-dark btn-busket position-fixed start-50 translate-middle d-block d-lg-none" href="./cart" style="bottom: 50px;z-index: 1000;">Корзина</a>
 @endsection

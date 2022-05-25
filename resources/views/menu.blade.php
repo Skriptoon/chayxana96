@@ -1,15 +1,14 @@
 @extends('layouts.app')
 
-
 @section('style')
-	@switch($menu)
-		@case(1)
+	@switch(Request::path())
+		@case('chayhana')
 			<link rel="stylesheet" href="/css/chayhana.style.css">
 			@break
-		@case(2)
+		@case('panasia')
 			<link rel="stylesheet" href="/css/panasia.style.css">
 			@break
-		@case(3)
+		@case('mangal')
 			<link rel="stylesheet" href="/css/mangal.style.css">
 			@break
 	@endswitch	

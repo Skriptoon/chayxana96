@@ -23,24 +23,6 @@ Route::get('/', function() {
     return view('home', ['positions' => $position->get()]);
 });
 
-Route::get('/chayhana', function() {
-    $position = new PositionController();
-    $category = new CategoryController();
-    return view('menu', ['positions' => $position->get(1), 'menu' => 1, 'categories' => $category->get(1)]);
-})->name('chayhana');
-
-Route::get('/panasia', function() {
-    $position = new PositionController();
-    $category = new CategoryController();
-    return view('menu', ['positions' => $position->get(2), 'menu' => 2, 'categories' => $category->get(2)]);
-})->name('panasia');
-
-Route::get('/mangal', function() {
-    $position = new PositionController();
-    $category = new CategoryController();
-    return view('menu', ['positions' => $position->get(3), 'menu' => 3, 'categories' => $category->get(3)]);
-})->name('mangal');
-
 Route::get('/contacts', function() {
     return view('contacts');
 })->name('contacts');
@@ -54,3 +36,22 @@ Route::post('/ajax/session/{method}', function($method, Request $request) {
     $session->$method($request); 
 });
 
+
+/******* Должно быть в конце **********/
+Route::get('/{menu}', function($menu) {
+    $position = new PositionController();
+    $category = new CategoryController();
+
+    switch($menu) {
+        case('chayhana'):
+            $menuId = 1;
+            break;
+        case('panasia'):
+            $menuId = 2;
+            break;
+        case('mangal'):
+            $menuId = 3;
+            break;
+    };
+    return view('menu', ['positions' => $position->get($menuId), 'categories' => $category->get($menuId)]);
+});

@@ -14,9 +14,9 @@ return new class extends Migration
     public function up()
     {
         Schema::create('menu__categories', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->string('id_name');
+            $table->integer('id', true);
+            $table->string('name', 63);
+            $table->string('id_name', 63);
             $table->integer('menu');
             $table->integer('order');
             $table->timestamps();

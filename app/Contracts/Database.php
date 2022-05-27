@@ -2,7 +2,7 @@
 
 namespace App\Contracts;
 
-interface DatabaseContract {
+interface Database {
 
     //public function save();
     public function getModel();

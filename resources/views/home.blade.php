@@ -26,27 +26,19 @@
     <div class="container">
         <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-inner">
-                <?php
-                $sql_host = "127.0.0.1";
-                $sql_user = "site";
-                $sql_pass = "test123";
-                $sql_db = "site";
-                $mysql = new mysqli($sql_host, $sql_user, $sql_pass, $sql_db);
-                $result = $mysql->query("SELECT * FROM `baner`");
-                $active = 0;
-                foreach($result as $row) {
-                ?>
-                <div class="carousel-item <?php if(!$active) echo "active"?>">
-                <img src="<?php echo $row['img']?>"></img>
+                @foreach($baners as $baner)
+                <div class="carousel-item 
+                @if ($loop->first)
+                    active
+                @endif
+                ">
+                <img src="{{$baner->img}}"></img>
                 <div class="carousel-caption d-none d-md-block">
-                    <h5><?php echo $row['header']?></h5>
-                    <p><?php echo $row['text']?></p>
+                    <h5>{{$baner->header}}</h5>
+                    <p>{{$baner->text}}</p>
                 </div>
                 </div>
-                <?php
-                $active = 1;
-                }
-                ?>
+                @endforeach
             </div>
             <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -135,7 +127,7 @@
             })
         </script>
     </div>
-    <script>updateCart()</script>
-    <script src="/js/events.js"></script>
     <a class="btn btn-dark btn-busket position-fixed start-50 translate-middle d-block d-lg-none" href="./cart" style="bottom: 50px;z-index: 1000;">Корзина</a>
+    <script>updateCart()</script>
+    <script src="/js/events.js"></script>  
 @endsection

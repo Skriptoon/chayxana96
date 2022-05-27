@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PositionController;
 use App\Http\Controllers\PositionAmountController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\BanerController;
 
 use Illuminate\Http\Request;
 
@@ -20,7 +21,8 @@ use Illuminate\Http\Request;
 
 Route::get('/', function() {
     $position = new PositionController();
-    return view('home', ['positions' => $position->getModel()->get()]);
+    $baner = new BanerController();
+    return view('home', ['positions' => $position->getModel()->get(), 'baners' => $baner->getModel()->get()]);
 })->name('home');
 
 Route::get('/cart', function() {

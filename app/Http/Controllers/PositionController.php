@@ -3,12 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Contracts\DatabaseContract;
+use App\Contracts\Database;
 use \App\Models\Menu__position;
 use Illuminate\Support\Facades\DB;
 
 
-class PositionController extends Controller implements DatabaseContract {
+class PositionController extends Controller implements Database {
 
 
     /*public function save() {

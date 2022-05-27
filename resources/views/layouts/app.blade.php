@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="/css/app.css">
     @yield('style')
     @yield('script')
+    <script src="/js/bootstrap.min.js"></script>
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-main">
@@ -40,7 +41,7 @@
                 <span class="navbar-text">
                     <div class="d-flex flex-column m-3">
                         <div>Донбасская, 6</div>
-                        <div>+7 (906) 855‒90‒37</div>
+                        <div><a class="text-decoration-none" href="tel:+79068559037">+7 (906) 855‒90‒37</a></div>
                     </div>
                 </span>
                 @if(Request::is('/'))

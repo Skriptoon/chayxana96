@@ -9,6 +9,10 @@
 // Configuration
 @import "functions";
 @import "variables";
+
+$nav-pills-link-active-color: $light !default;
+$nav-pills-link-active-bg: $dark !default;
+
 @import "mixins";
 @import "utilities";
 

@@ -27,9 +27,11 @@ Route::get('/cart', function() {
     $position = new PositionController();
     $positions =array();
     $positions = [];
-    foreach(session('positions') as $posId => $val) {
-        if($val)
-            $positions[] = $posId;
+    if(session()->has('positions')){  
+          foreach(session('positions') as $posId => $val) {
+            if($val)
+                $positions[] = $posId;
+        }
     }
     return view('cart', ['positions' => $position->getModel()->whereIn('menu__positions.id', $positions)->get()]);
 })->name('cart');

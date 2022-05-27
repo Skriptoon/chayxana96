@@ -1,5 +1,8 @@
 @import "./bootstrap/bootstrap";
 
+$nav-pills-link-active-color: $dark !default;
+$nav-pills-link-active-bg: $light !default;
+
 .pr-picture {
     width: 100%;
 	height: 220px;

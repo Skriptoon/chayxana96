@@ -3,7 +3,7 @@
 		<div class="col-lg-4">
 			<div class="d-flex flex-column m-3">
 				<div class="fs-4 fw-bold">Телефон доставки</div>
-				<div>+7 (906) 855‒90‒37</div>
+				<div><a class="link-dark text-decoration-none" href="tel:+79068559037">+7 (906) 855‒90‒37</a></div>
 			</div>
 		</div>
 		<div class="col-lg-4">

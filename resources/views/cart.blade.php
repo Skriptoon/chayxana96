@@ -40,15 +40,16 @@
                     }
                     </script>
                     @endforeach
-                @else
-                    echo "Корзина пуста";
-                @endif
+                
                 <div class="fs-3 fw-bold text-end">
                     Итого: <span class="pr-sum"></span>
                     <script>
                         updateSum()
                     </script>
                 </div>
+                @else
+                    Корзина пуста
+                @endif
             </div>
             <div>
                 <ul class="nav nav-pills justify-content-center my-3" id="myTab" role="tablist">

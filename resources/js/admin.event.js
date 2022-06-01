@@ -15,6 +15,7 @@ $('.offcanvas-category').click(function(){
 
 $('input[type="submit"]').click(function() {
     var data = $(this).parent().serialize();
+    var elem = $(this);
     $(this).prop("disabled", true)
     $.ajax({
         url: '/ajax/categoryadmin/save',
@@ -23,13 +24,26 @@ $('input[type="submit"]').click(function() {
         data: data,
         success: function() {
             location.reload();
+        },
+        error: function(data) {
+            elem.prop("disabled", false);
+            
+            for (var key in data.responseJSON.errors) {
+                $('input[name="' + key + '"]').addClass('is-invalid');
+                $('input[name="' + key + '"]').parent().children('.invalid-tooltip').text(data.responseJSON.errors[key]);
+            }
         }
     });
     return false;
 });
+
+$('input[type="text"]').focus(function(){
+    $(this).removeClass('is-invalid')
+});
+
 $('.btn-delete').click(function() {
     var data = $(this).parent().serialize();
-    $(this).prop("disabled", true)
+    $(this).prop("disabled", true);
     $.ajax({
         url: '/ajax/categoryadmin/delete',
         type: 'POST',

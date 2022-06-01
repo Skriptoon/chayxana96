@@ -3,7 +3,6 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PositionController;
 use App\Http\Controllers\PositionAmountController;
-use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\BanerController;
 
 use Illuminate\Http\Request;
@@ -106,7 +105,6 @@ curl_close($ch);
 /******* Должно быть в конце **********/
 Route::get('/{menu}', function($menu) {
     $position = new PositionController();
-    $category = new CategoryController();
 
     switch($menu) {
         case('chayhana'):
@@ -119,8 +117,10 @@ Route::get('/{menu}', function($menu) {
             $menuId = 3;
             break;
     };
-    $cat = new App\Http\Controllers\CategoryMenuController();
+
+    $category = new App\Http\Controllers\CategoryMenuController();
+
     return view('menu', [
         'positions' => $position->getModel()->get(),
-        'categories' => $cat->get($menuId)]);
+        'categories' => $category->get($menuId)]);
 });

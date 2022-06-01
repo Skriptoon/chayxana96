@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\CategoryController;
+use App\Models\Menu__sort;
+use Illuminate\Support\Facades\Validator;
 
 class CategoryAdminController extends CategoryController
 {
-    public function get($menu = null) {
+    public function get() {
         $category = parent::get()->get();
         
         $sort = $this->getSort();
@@ -36,6 +38,12 @@ class CategoryAdminController extends CategoryController
     }
 
     public function save(Request $request) {
+        Validator::make($request->all(), [
+            'id' => 'required|integer',
+            'name' => 'required',
+            'menu' => 'required'],
+            ['name.required' => 'Обязательное поле'])->validate();
+
         $sort = parent::get()->updateOrInsert(
             ['id' => $request->id],
             ['name' => $request->name,
@@ -46,6 +54,13 @@ class CategoryAdminController extends CategoryController
 
     public function delete(Request $request) {
         $sort = parent::get()->where('id', '=', $request->id)->delete();
+    }
+
+    public function updateSort(Request $request) {
+        $sort = Menu__sort::updateOrInsert(
+            ['type' => 'category'],
+            ['sort' => $request->sort]
+        );
     }
 
     private function translit($value)

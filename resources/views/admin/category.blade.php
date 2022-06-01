@@ -109,8 +109,10 @@
     <div class="offcanvas-body">
         <form id="formnew">
             @csrf
-            <div class="mb-3">
+            <div class="mb-3 position-relative">
               <input type="text" name="name" class="form-control" placeholder="Название">
+              <div class="invalid-tooltip">
+              </div>
             </div>
             <select class="form-select mb-3" name="menu" aria-label="Default select example">
               <option value="1">ЧайХана#96</option>

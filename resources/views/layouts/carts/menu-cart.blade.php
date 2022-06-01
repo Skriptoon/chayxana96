@@ -5,7 +5,7 @@
         </div>
         <h5 class="pt-3">{{$position->name}}</h5>
         <div class="pr-desc pb-2">
-            {{$position->description}}
+            {{$position->desc}}
         </div>
         <div class="d-flex pr-price" style="height: 40px;">
             <div class="position-absolute price"><h4>{{$position->price}} &#8381; </h4></div>

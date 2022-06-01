@@ -92,7 +92,7 @@ $(".btn-order").click(function() {
 	elem.parent().children("div").children("input[name='street']").removeClass("is-invalid");
 	elem.parent().children("div").children("input[name='house']").removeClass("is-invalid");
 	$("input[name='change']").removeClass("is-invalid");
-	$.ajax({
+	/*$.ajax({
 		url: "../ajax/order.php",
 		type: "POST",
 		data: $(this).parent().serialize(),
@@ -117,6 +117,28 @@ $(".btn-order").click(function() {
 				}
 			}
 		}
-	});
+	});*/
+	$.ajax({
+		url: 'https://paymaster.ru/api/v2/invoices',
+		type: 'POST',
+		headers: {
+			"Authorization": "Bearer 2a17d9f5ff12d8147dad6f5567eecbbde0c92923895f5ceec747a7a556b4a5cd4566c44ce44ddbaa29d0b77ba1458d155f7d",
+			"Content-type": "application/json"
+		},
+		data: '{\
+			"merchantId": "cf128151-127b-44ed-bde5-26c531cad20d",\
+			"invoice": {\
+			  "description": "test payment",\
+			  "params": {\
+				"BT_USR": "34"\
+			  }\
+			},\
+			"amount": {\
+			  "value": 10.50,\
+			  "currency": "RUB"\
+			},\
+			"paymentMethod": "BankCard"   \
+		  }'
+	})
 	return false;
 });

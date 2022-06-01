@@ -76,6 +76,7 @@
                             <input class="form-check-input" type="radio" name="paypickup" value="1" id="radio11" checked>
                             <label class="form-check-label" for="radio11">
                                 Картой на сайте
+                                <img src="/img/pay-logo.png" width="130">
                             </label>
                         </div>
                         <div class="form-check mx-3">
@@ -120,6 +121,7 @@
                                 <input class="form-check-input" type="radio" name="paydelivery" value="1" id="radio1" value="1" >
                                 <label class="form-check-label" for="radio1">
                                     Картой на сайте
+                                    <img src="/img/pay-logo.png"  width="130">
                                 </label>
                             </div>
                             <div class="form-check mx-3">

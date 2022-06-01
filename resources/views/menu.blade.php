@@ -25,42 +25,45 @@
 
 
 @section('content')
+
+@foreach ($categories as $category) 
+	@php
+		$catSort[$category->id] = $category;
+	@endphp
+@endforeach
 <div class="container-fluid bg-main sticky-top">
 	<div class="container d-flex py-2">
 		<ul class="nav nav-pills flex-grow-1 overflow-auto flex-nowrap">
-			@foreach($categories as $category)
-			<li class="nav-item">
+            @foreach ($categories as $category)
 				<a class="nav-link text-nowrap link-dark fw-bold" href="#{{$category->id_name}}">{{$category->name}}</a>
-			</li>
-			@endforeach
+            @endforeach
 		</ul>
 		<a class="btn btn-main btn-busket d-none d-lg-block" href="./cart">Корзина</a>
 	</div>
 </div>
 <div class="container container-body">
 <div class="bg-light px-2 menu-body">
-@foreach($categories as $category)
-	<h3 class="p-5" id="{{$category->id_name}}">{{$category->name}}</h3>
-	<div class="row">
-
-	@foreach($positions as $position)
-		@if($position->id_category == $category->id)
-			@include('layouts.carts.menu-cart')
+@foreach ($categories as $category)
+		<h3 class="p-5" id="{{$category->id_name}}">{{$category->name}}</h3>
+		<div class="row">
+		@foreach($positions as $position)
+			@if($position->id_category == $category->id)
+				@include('layouts.carts.menu-cart')
 			
-		@endif
-		<script>
-		if(!prParam) var prParam = [];
-		prParam[{{$position->id}}] = {
-			price: {{$position->price}},
-			amount: @if(isset(session('positions')[$position->id]))
-					{{ session('positions')[$position->id] }} 
-				@else
-					0
-				@endif
-		}
-		</script>
-	@endforeach
-	</div>
+				<script>
+				if(!prParam) var prParam = [];
+				prParam[{{$position->id}}] = {
+					price: {{$position->price}},
+					amount: @if(isset(session('positions')[$position->id]))
+							{{ session('positions')[$position->id] }} 
+						@else
+							0
+						@endif
+				}
+				</script>
+			@endif
+		@endforeach
+		</div>
 @endforeach
 </div>
 </div>

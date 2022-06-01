@@ -10939,15 +10939,6 @@ textarea.form-control-lg {
   padding: 0;
 }
 
-.tab_slider .fast_view,
-.slider .fast_view {
-  /*display: none;*/
-}
-
-.slider .owl-carousel, .slider_in_fast .owl-carousel {
-  /*margin: 30px 0 0;*/
-}
-
 .owl-carousel .owl-dots {
   display: flex;
   justify-content: center;

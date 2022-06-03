@@ -27,7 +27,7 @@
             Меню
           </a>
           <ul class="dropdown-menu" aria-labelledby="menu">
-            <li><a class="dropdown-item" href="/admin/menu">Позиции</a></li>
+            <li><a class="dropdown-item" href="{{route('admin_position')}}">Позиции</a></li>
             <li><a class="dropdown-item" href="{{route('admin_category')}}">Категории</a></li>
 			</ul>
 			</li>

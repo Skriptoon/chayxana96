@@ -19,7 +19,7 @@
                 sortedIDs[1] = $( "#sortable2" ).sortable( "toArray" );
                 sortedIDs[2] = $( "#sortable3" ).sortable( "toArray" );
                 $.ajax({
-                    url: "/ajax/category/updateSort",
+                    url: "/ajax/categoryadmin/updateSort",
                     type: "POST",
                     data: 'sort='+JSON.stringify(sortedIDs),
                     cache: false,
@@ -38,7 +38,7 @@
                 sortedIDs[1] = $( "#sortable2" ).sortable( "toArray" );
                 sortedIDs[2] = $( "#sortable3" ).sortable( "toArray" );
                 $.ajax({
-                    url: "/ajax/category/updateSort",
+                    url: "/ajax/categoryadmin/updateSort",
                     type: "POST",
                     data: 'sort='+JSON.stringify(sortedIDs),
                     cache: false,
@@ -57,7 +57,7 @@
                 sortedIDs[1] = $( "#sortable2" ).sortable( "toArray" );
                 sortedIDs[2] = $( "#sortable3" ).sortable( "toArray" );
                 $.ajax({
-                    url: "/ajax/category/updateSort",
+                    url: "/ajax/categoryadmin/updateSort",
                     type: "POST",
                     data: 'sort='+JSON.stringify(sortedIDs),
                     cache: false,
@@ -119,7 +119,7 @@
               <option value="2">Пан-азия</option>
               <option value="3">Мангал#1</option>
             </select>
-            <input class="btn btn-dark" type="submit" value="Сохранить">
+            <input class="btn btn-dark btn-save" type="submit" value="Сохранить">
             <input class="btn btn-danger btn-delete" type="button" value="Удалить">
             <input type="hidden" name="id">
         </form>

@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PositionController;
-use App\Http\Controllers\PositionAmountController;
+use App\Http\Controllers\SessionController;
 use App\Http\Controllers\BanerController;
 
 use Illuminate\Http\Request;
@@ -27,16 +27,24 @@ Route::domain('admin.localhost')->group(function() {
         $category = new App\Http\Controllers\CategoryAdminController();
         return view('admin.category', ['categories' => $category->get()]);
     })->name('admin_category');
+
+    Route::get('/position', function() {
+        $category = new App\Http\Controllers\CategoryAdminController();
+        $position = new App\Http\Controllers\PositionAdminController();
+        return view('admin.position', 
+        ['categories' => $category->get(),
+        'positions' => $position->get()]);
+    })->name('admin_position');;
 });
 
 Route::get('/', function() {
-    $position = new PositionController();
+    $position = new App\Http\Controllers\PositionMenuController();
     $baner = new BanerController();
-    return view('home', ['positions' => $position->getModel()->get(), 'baners' => $baner->getModel()->get()]);
+    return view('home', ['positions' => $position->get()->get(), 'baners' => $baner->getModel()->get()]);
 })->name('home');
 
 Route::get('/cart', function() {
-    $position = new PositionController();
+    $position = new App\Http\Controllers\PositionMenuController();
     $positions =array();
     $positions = [];
     if(session()->has('positions')){  
@@ -45,7 +53,7 @@ Route::get('/cart', function() {
                 $positions[] = $posId;
         }
     }
-    return view('cart', ['positions' => $position->getModel()->whereIn('menu__positions.id', $positions)->get()]);
+    return view('cart', ['positions' => $position->get()->whereIn('menu__positions.id', $positions)->get()]);
 })->name('cart');
 
 Route::get('/delivery', function() {
@@ -65,47 +73,9 @@ Route::post('/ajax/{class}/{method}', function($class, $method, Request $request
     $session = new $class();
     $session->$method($request); 
 });
-/*
-Route::post('/ajax/category/{method}', function($method, Request $request) {
-    $session = new CategoryController();
-    $session->$method($request); 
-});*/
-
-route::get('/test', function() {
-    // создание нового cURL ресурса
-$ch = curl_init();
-
-// установка URL и других необходимых параметров
-curl_setopt($ch, CURLOPT_URL, "https://paymaster.ru/api/v2/invoices");
-curl_setopt($ch, CURLOPT_HEADER, true);
-curl_setopt($ch, CURLOPT_HTTPHEADER, ["Authorization: Bearer 2a17d9f5ff12d8147dad6f5567eecbbde0c92923895f5ceec747a7a556b4a5cd4566c44ce44ddbaa29d0b77ba1458d155f7d", "Content-type: application/json"]);
-curl_setopt($ch, CURLOPT_POSTFIELDS, '{
-    "merchantId": "01fe51c5-ea66-4052-9ed7-dfc753b49a56",
-    "testMode": true,
-    "invoice": {
-      "description": "test payment",
-      "params": {
-        "BT_USR": "34"
-      }
-    },
-    "amount": {
-      "value": 10.50,
-      "currency": "RUB"
-    },
-    "paymentMethod": "BankCard"   
-  }');
-
-// загрузка страницы и выдача её браузеру
-curl_exec($ch);
-
-// завершение сеанса и освобождение ресурсов
-curl_close($ch);
-});
 
 /******* Должно быть в конце **********/
 Route::get('/{menu}', function($menu) {
-    $position = new PositionController();
-
     switch($menu) {
         case('chayhana'):
             $menuId = 1;
@@ -118,9 +88,10 @@ Route::get('/{menu}', function($menu) {
             break;
     };
 
+    $position = new App\Http\Controllers\PositionMenuController();
     $category = new App\Http\Controllers\CategoryMenuController();
 
     return view('menu', [
-        'positions' => $position->getModel()->get(),
+        'positions' => $position->get($menuId),
         'categories' => $category->get($menuId)]);
 });

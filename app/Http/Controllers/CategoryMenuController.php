@@ -10,7 +10,7 @@ class CategoryMenuController extends CategoryController
         $category = parent::get()->where('menu', $menu)->get();
         
         $sort = $this->getSort();
-        $sort = json_decode($sort->sort)[0];
+        $sort = json_decode($sort->sort)[$menu - 1];
 
         $categories = [];
         foreach($category as $item) {

@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class PositionAmountController extends Controller
+class SessionController extends Controller
 {
     public function set(Request $request) {
 

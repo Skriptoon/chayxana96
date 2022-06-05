@@ -26,16 +26,16 @@
     <div class="container">
         <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-inner">
-                @foreach($baners as $baner)
-                <div class="carousel-item 
+                @foreach($banners as $banner)
+                <div class="carousel-item
                 @if ($loop->first)
                     active
                 @endif
                 ">
-                <img src="{{$baner->img}}"></img>
+                <img src="{{$banner->img}}"></img>
                 <div class="carousel-caption d-none d-md-block">
-                    <h5>{{$baner->header}}</h5>
-                    <p>{{$baner->text}}</p>
+                    <h5>{{$banner->header}}</h5>
+                    <p>{{$banner->text}}</p>
                 </div>
                 </div>
                 @endforeach
@@ -50,10 +50,13 @@
             </button>
         </div>
         <div class="row pt-4">
-            <div class="col-lg-6 pb-2">
+            <div class="col-lg-4 pb-2">
                 <a href="{{ route('contacts') }}" class="btn btn-dark w-100">Контакты</a>
             </div>
-            <div class="col-lg-6">
+            <div class="col-lg-4 pb-2">
+                <a href="{{ route('hall') }}" class="btn btn-dark w-100">Банкетный зал</a>
+            </div>
+            <div class="col-lg-4">
                 <a href="{{ route('delivery') }}" class="btn btn-dark w-100">Условия доставки</a>
             </div>
         </div>
@@ -63,16 +66,16 @@
             if(!prParam) var prParam = [];
             prParam[{{$position->id}}] = {
                 price: {{$position->price}},
-                amount: 
+                amount:
                 @if(isset(session('positions')[$position->id]))
-                    {{ session('positions')[$position->id] }} 
+                    {{ session('positions')[$position->id] }}
                 @else
                     0
                 @endif
             }
         </script>
         @endforeach
-        
+
         <div class="py-4 d-flex justify-content-between">
             <a href="/chayhana" class="fs-3 text-decoration-none text-dark fw-bold">Чайхана#96</a>
             <a href="/chayhana" class="btn btn-dark align-top">В меню</a>
@@ -82,7 +85,7 @@
                 @if($position->menu != 1 || !$position->main_page)
                     @continue
                 @endif
-                
+
                 @include('layouts.carts.home-cart')
             @endforeach
         </div>
@@ -95,7 +98,7 @@
                 @if($position->menu != 2 || !$position->main_page)
                     @continue
                 @endif
-                
+
                 @include('layouts.carts.home-cart')
             @endforeach
         </div>
@@ -108,7 +111,7 @@
                 @if($position->menu != 3 || !$position->main_page)
                     @continue
                 @endif
-                
+
                 @include('layouts.carts.home-cart')
             @endforeach
         </div>
@@ -129,5 +132,5 @@
     </div>
     <a class="btn btn-dark btn-busket position-fixed start-50 translate-middle d-block d-lg-none" href="./cart" style="bottom: 50px;z-index: 1000;">Корзина</a>
     <script>updateCart()</script>
-    <script src="/js/events.js"></script>  
+    <script src="/js/events.js"></script>
 @endsection

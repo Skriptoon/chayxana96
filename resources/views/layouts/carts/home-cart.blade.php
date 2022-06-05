@@ -1,7 +1,7 @@
 <div class="item">
     <div class="position-relative  p-4 m-1 bg-main pr-info shadow">
             <div class="pr-picture">
-                <img src="{{$position->img}}" alt="{{$position->name}}">
+                <img src="{{Storage::url($position->img)}}" alt="{{$position->name}}">
             </div>
             <h5 class="text-truncate">{{$position->name}}</h5>
             <div class="d-flex pr-price" style="height: 40px;">
@@ -20,4 +20,3 @@
             </div>
         </div>
     </div>
-    

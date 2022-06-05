@@ -1,7 +1,7 @@
 <div class="col-xl-3 my-2">
     <div class="position-relative h-100 p-4 m-1 bg-main pr-info shadow">
         <div class="pr-picture">
-            <img src="{{$position->img}}" alt="{{$position->name}}">
+            <img src="{{Storage::url($position->img)}}" alt="{{$position->name}}">
         </div>
         <h5 class="pt-3">{{$position->name}}</h5>
         <div class="pr-desc pb-2">

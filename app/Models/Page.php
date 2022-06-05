@@ -4,8 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Menu__sort extends Model
+class Page extends Model
 {
-    protected $table = "menu__sorts";
-    
+    protected $table = "pages";
 }

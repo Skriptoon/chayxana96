@@ -3,15 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Contracts\Database;
-use Illuminate\Http\Request;
-use \App\Models\Baner;
-use Illuminate\Support\Facades\DB;
+use \App\Models\Banner;
 
-class banerController extends Controller implements Database
+class BanerController extends Controller
 {
-    public function getModel() {
-        $baner = Baner::select();
-        
-        return $baner;
+    public function get() {
+        return Banner::get();
     }
 }

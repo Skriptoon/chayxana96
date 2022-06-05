@@ -60,7 +60,7 @@
 						$( "#sortable{{$category->id}}" ).sortable({
 							update: function( event, ui ) {
 								var sortedIDs = [];
-								
+
 								for(k = 0; k < catIds.length; k++) {
 									var sort = [];
 									for(i = 0; i < catIds[k].length; i++) {
@@ -119,7 +119,7 @@
 					$( "#sortable{{$category->id}}" ).sortable({
 						update: function( event, ui ) {
 							var sortedIDs = [];
-							
+
 							for(k = 0; k < catIds.length; k++) {
 								var sort = [];
 								for(i = 0; i < catIds[k].length; i++) {
@@ -178,7 +178,7 @@
 					$( "#sortable{{$category->id}}" ).sortable({
 						update: function( event, ui ) {
 							var sortedIDs = [];
-							
+
 							for(k = 0; k < catIds.length; k++) {
 								var sort = [];
 								for(i = 0; i < catIds[k].length; i++) {
@@ -198,7 +198,7 @@
 							});
 						}
 					});
-					
+
 				</script>
 			@endforeach
 			</div>
@@ -207,7 +207,7 @@
 </div>
 <div class="offcanvas offcanvas-end" tabindex="-1" id="positionedit" aria-labelledby="offcanvasLabel">
     <div class="offcanvas-header">
-        <h5 class="offcanvas-title" id="offcanvasLabel">Категория</h5>
+        <h5 class="offcanvas-title" id="offcanvasLabel">Позиция</h5>
         <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
     <div class="offcanvas-body">

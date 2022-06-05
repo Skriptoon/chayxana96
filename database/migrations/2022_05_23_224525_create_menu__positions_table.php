@@ -21,7 +21,6 @@ return new class extends Migration
             $table->string('desc');
             $table->integer('price');
             $table->boolean('main_page');
-            $table->integer('order');
             $table->timestamps();
         });
     }

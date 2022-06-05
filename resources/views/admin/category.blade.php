@@ -5,6 +5,10 @@
     <script src="/js/jquery.ui.touch-punch.min.js"></script>
 @endsection
 
+@section('title')
+    Редактор категорий
+@endsection
+
 @section('content')
 <div class="container">
 	<h3>Категории</h3>
@@ -70,7 +74,7 @@
         });
     </script>
     @for($i = 0; $i < count($categories); $i++)
-        @foreach ($categories[$i] as $category) 
+        @foreach ($categories[$i] as $category)
             @php
                 $catSort[$category->id] = $category;
             @endphp
@@ -83,19 +87,19 @@
     <div class="row">
         <div class="mt-3 border-top col-lg-4" id="sortable1">
             <div class="border-bottom py-2 ui-state-disabled ui-state-default">ЧайХана#96</div>
-            @foreach ($categories[0] as $category) 
+            @foreach ($categories[0] as $category)
                 <div class="border-bottom py-2 ps-3 str-cat offcanvas-category" id="{{$category->id}}">{{$category->name}}</div>
             @endforeach
         </div>
         <div class="mt-3 border-top col-lg-4" id="sortable2">
             <div class="border-bottom py-2 ui-state-disabled ui-state-default">Пан-азия</div>
-            @foreach ($categories[1] as $category) 
+            @foreach ($categories[1] as $category)
                 <div class="border-bottom py-2 ps-3 str-cat offcanvas-category" id="{{$category->id}}">{{$category->name}}</div>
             @endforeach
         </div>
         <div class="mt-3 border-top col-lg-4" id="sortable3">
             <div class="border-bottom py-2 ui-state-disabled ui-state-default">Мангал#1</div>
-            @foreach ($categories[2] as $category) 
+            @foreach ($categories[2] as $category)
                 <div class="border-bottom py-2 ps-3 str-cat offcanvas-category" id="{{$category->id}}">{{$category->name}}</div>
             @endforeach
         </div>

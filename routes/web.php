@@ -1,8 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\PositionController;
-use App\Http\Controllers\SessionController;
 use App\Http\Controllers\BanerController;
 
 use Illuminate\Http\Request;
@@ -31,23 +29,42 @@ Route::domain('admin.localhost')->group(function() {
     Route::get('/position', function() {
         $category = new App\Http\Controllers\CategoryAdminController();
         $position = new App\Http\Controllers\PositionAdminController();
-        return view('admin.position', 
+        return view('admin.position',
         ['categories' => $category->get(),
         'positions' => $position->get()]);
-    })->name('admin_position');;
+    })->name('admin_position');
+
+    Route::get('/сontacts', function () {
+        $contacts = new \App\Http\Controllers\PageController();
+        return view('admin.page', ['page' => $contacts->get('contacts')]);
+    })->name('admin_contacts');
+
+    Route::get('/delivery', function () {
+        $contacts = new \App\Http\Controllers\PageController();
+        return view('admin.page', ['page' => $contacts->get('delivery')]);
+    })->name('admin_delivery');
+
+    Route::get('/hall', function () {
+        $contacts = new \App\Http\Controllers\PageController();
+        return view('admin.page', ['page' => $contacts->get('hall')]);
+    })->name('admin_hall');
+
+    Route::get('/banners', function () {
+        $contacts = new \App\Http\Controllers\PageController();
+        return view('admin.contacts', ['baner' => $contacts->get('delivery')]);
+    })->name('admin_banners');
 });
 
 Route::get('/', function() {
     $position = new App\Http\Controllers\PositionMenuController();
-    $baner = new BanerController();
-    return view('home', ['positions' => $position->get()->get(), 'baners' => $baner->getModel()->get()]);
+    $banner = new BanerController();
+    return view('home', ['positions' => $position->get(), 'banners' => $banner->get()]);
 })->name('home');
 
 Route::get('/cart', function() {
     $position = new App\Http\Controllers\PositionMenuController();
-    $positions =array();
     $positions = [];
-    if(session()->has('positions')){  
+    if(session()->has('positions')){
           foreach(session('positions') as $posId => $val) {
             if($val)
                 $positions[] = $posId;
@@ -57,25 +74,29 @@ Route::get('/cart', function() {
 })->name('cart');
 
 Route::get('/delivery', function() {
-    return view('delivery');
+    $page = new \App\Http\Controllers\PageController();
+    return view('page', ['page' => $page->get('delivery')]);
 })->name('delivery');
 
 Route::get('/contacts', function() {
-    return view('contacts');
+    $page = new \App\Http\Controllers\PageController();
+    return view('page', ['page' => $page->get('contacts')]);
 })->name('contacts');
 
-Route::get('/delivery', function() {
-    return view('delivery');
-})->name('delivery');
+Route::get('/hall', function() {
+    $page = new \App\Http\Controllers\PageController();
+    return view('page', ['page' => $page->get('hall')]);
+})->name('hall');
 
 Route::post('/ajax/{class}/{method}', function($class, $method, Request $request) {
     $class = 'App\Http\Controllers\\'.$class.'Controller';
     $session = new $class();
-    $session->$method($request); 
+    $session->$method($request);
 });
 
 /******* Должно быть в конце **********/
 Route::get('/{menu}', function($menu) {
+    $menuId = null;
     switch($menu) {
         case('chayhana'):
             $menuId = 1;
@@ -86,7 +107,7 @@ Route::get('/{menu}', function($menu) {
         case('mangal'):
             $menuId = 3;
             break;
-    };
+    }
 
     $position = new App\Http\Controllers\PositionMenuController();
     $category = new App\Http\Controllers\CategoryMenuController();

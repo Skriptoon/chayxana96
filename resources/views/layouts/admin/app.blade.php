@@ -9,6 +9,7 @@
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<script src="/js/main.js"></script>
     @yield('script')
+    <title>@yield('title')</title>
 </head>
 <body>
 	<nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -36,9 +37,10 @@
             Настройки
           </a>
           <ul class="dropdown-menu" aria-labelledby="menu1">
-            <li><a class="dropdown-item" href="/admin/contacts">Контакты</a></li>
-			<li><a class="dropdown-item" href="/admin/delivery">Условия доставки</a></li>
-            <li><a class="dropdown-item" href="/admin/baner">Банеры на гл. странице</a></li>
+            <li><a class="dropdown-item" href="{{route('admin_contacts')}}">Контакты</a></li>
+			<li><a class="dropdown-item" href="{{route('admin_delivery')}}">Условия доставки</a></li>
+              <li><a class="dropdown-item" href="{{route('admin_hall')}}">Банкетный зал</a></li>
+            <li><a class="dropdown-item" href="{{route('admin_banners')}}">Банеры на гл. странице</a></li>
 			</ul>
 			</li>
 		  </ul>

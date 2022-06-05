@@ -13,12 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('baners', function (Blueprint $table) {
-            $table->integer('id', true);
-            $table->string('img');
-            $table->string('header', 63);
-            $table->string('text');
-            $table->timestamps();
+        Schema::create('sorts', function (Blueprint $table) {
+            $table->insteger('id', true);
+            $table->string('type', 31);
+            $table->string('sort');
         });
     }
 
@@ -29,6 +27,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('baners');
+        Schema::dropIfExists('sorts');
     }
 };

@@ -13,12 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('menu__categories', function (Blueprint $table) {
+        Schema::create('pages', function (Blueprint $table) {
             $table->integer('id', true);
-            $table->string('name', 63);
-            $table->string('id_name', 63);
-            $table->integer('menu');
-            $table->timestamps();
+            $table->string('page', 63);
+            $table->text('code');
         });
     }
 
@@ -29,6 +27,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('menu__categories');
+        Schema::dropIfExists('pages');
     }
 };

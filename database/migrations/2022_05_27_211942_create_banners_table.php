@@ -13,10 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('menu__position_sorts', function (Blueprint $table) {
-            $table->insteger('id', true);
-            $table->string('type', 31);
-            $table->string('sort');
+        Schema::create('banners', function (Blueprint $table) {
+            $table->integer('id', true);
+            $table->string('img');
+            $table->string('header', 63);
+            $table->string('text');
+            $table->timestamps();
         });
     }
 
@@ -27,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('menu__position_sorts');
+        Schema::dropIfExists('banners');
     }
 };

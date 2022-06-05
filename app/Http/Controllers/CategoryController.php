@@ -13,7 +13,6 @@ abstract class CategoryController extends Controller
         $sort = $this->modelSort::where('type', 'category')->first();
 
         $sort = json_decode($sort->sort);
-        $sssssssss = 1;
 
         $sortCategory = [];
         for($i = 0; $i < count($sort); $i++) {

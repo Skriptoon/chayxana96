@@ -133,6 +133,23 @@ $('.btn-save-pos').click(function () {
   });
   return false;
 });
+$(".btn-save-page").click(function () {
+  var query = 'text=' + escapeRegExp(nicEditors.findEditor('area2').getContent()) + '&id=' + $(this).attr('id');
+  $.ajax({
+    url: "/ajax/page/save",
+    type: "POST",
+    data: query,
+    cache: false,
+    headers: {
+      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    },
+    success: function success(data) {}
+  });
+});
+
+function escapeRegExp(string) {
+  return string.replace(/[&]/g, "/amp/");
+}
 
 /***/ }),
 

@@ -29,13 +29,10 @@
 					<div class="row" id="sortable{{$category->id}}">
 					@foreach ($positions[0] as $position)
 						@if($position->id_category == $category->id)
-						@php
-							$position->img = Storage::url($position->img);
-						@endphp
 						<div class="col-xl-3 my-2 pos-cart offcanvas-position" id="{{$position->id}}">
 							<div class="position-relative h-100 p-4 m-1 bg-main pr-info shadow">
 								<div class="pr-picture">
-									<img src="{{$position->img}}" alt="{{$position->name}}">
+									<img src="{{Storage::url($position->img)}}" alt="{{$position->name}}">
 								</div>
 								<h5 class="pt-3">{{$position->name}}</h5>
 								<div class="pr-desc pb-2">
@@ -49,6 +46,7 @@
 						<script>
 							if(!positions) var positions = [];
                 			positions[{{$position->id}}] = {{ Illuminate\Support\Js::from($position) }};
+                            positions[{{$position->id}}]['img'] = '{{Storage::url($position->img)}}';
 						</script>
 						@endif
 					@endforeach
@@ -94,7 +92,7 @@
 					<div class="col-xl-3 my-2 pos-cart offcanvas-position" id="{{$position->id}}">
 						<div class="position-relative h-100 p-4 m-1 bg-main pr-info shadow">
 							<div class="pr-picture">
-								<img src="{{$position->img}}" alt="{{$position->name}}">
+								<img src="{{Storage::url($position->img)}}" alt="{{$position->name}}">
 							</div>
 							<h5 class="pt-3">{{$position->name}}</h5>
 							<div class="pr-desc pb-2">
@@ -108,6 +106,7 @@
 					<script>
 						if(!positions) var positions = [];
 						positions[{{$position->id}}] = {{ Illuminate\Support\Js::from($position) }};
+                        positions[{{$position->id}}]['img'] = '{{Storage::url($position->img)}}';
 					</script>
 					@endif
 				@endforeach
@@ -153,7 +152,7 @@
 					<div class="col-xl-3 my-2 pos-cart offcanvas-position" id="{{$position->id}}">
 						<div class="position-relative h-100 p-4 m-1 bg-main pr-info shadow">
 							<div class="pr-picture">
-								<img src="{{$position->img}}" alt="{{$position->name}}">
+								<img src="{{Storage::url($position->img)}}" alt="{{$position->name}}">
 							</div>
 							<h5 class="pt-3">{{$position->name}}</h5>
 							<div class="pr-desc pb-2">
@@ -167,6 +166,7 @@
 					<script>
 						if(!positions) var positions = [];
 						positions[{{$position->id}}] = {{ Illuminate\Support\Js::from($position) }};
+                        positions[{{$position->id}}]['img'] = '{{Storage::url($position->img)}}';
 					</script>
 					@endif
 				@endforeach
@@ -213,7 +213,7 @@
     <div class="offcanvas-body">
         <form id="formpos">
             @csrf
-            <div class="mb-3">
+            <div class="mb-3 position-relative">
 				<input type="text" name="name" class="form-control" placeholder="Название">
 				<div class="invalid-tooltip">
 				</div>
@@ -222,7 +222,7 @@
 				<label for="formFile" class="form-label">Изображение позиции</label>
 				<input class="form-control" type="file" name="img" id="formFile">
 			</div>
-			<div class="mb-3">
+			<div class="mb-3 position-relative">
 				<input type="text" name="price" class="form-control" placeholder="Цена">
 				<div class="invalid-tooltip">
 				</div>

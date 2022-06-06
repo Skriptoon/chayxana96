@@ -23,7 +23,7 @@
             }
             bkLib.onDomLoaded(function() {
                 new nicEditor({fullPanel : true}).panelInstance('area2');
-                nicEditors.findEditor('area2').setContent(HTMLDecode('{{$page->code}}'));
+                nicEditors.findEditor('area2').setContent(HTMLDecode('{{str_replace('/amp/', '&', $page->code)}}'));
             });
         </script>
         <button class="btn btn-dark btn-save-page my-2" id="{{$page->id}}">Сохранить</button>

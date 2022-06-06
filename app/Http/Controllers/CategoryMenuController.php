@@ -7,28 +7,13 @@ use App\Http\Controllers\CategoryController;
 class CategoryMenuController extends CategoryController
 {
     public function get($menu = null) {
-        $category = parent::get()->where('menu', $menu)->get();
-        
-        $sort = $this->getSort();
-        $sort = json_decode($sort->sort)[$menu - 1];
+        $category = $this->modelCategory::where('menu', $menu)->get();
 
         $categories = [];
         foreach($category as $item) {
-            $categories[$item->id] = $item; 
+            $categories[$item->id] = $item;
         }
 
-        $sortCategory = [];
-        for($i = 0; $i < count($sort); $i++) {
-            if(isset($categories[$sort[$i]])) {
-                $sortCategory[] = $categories[$sort[$i]];
-            } 
-        }
-
-        foreach($categories as $key => $val) {
-            if(array_search($key, $sort) === false)
-                $sortCategory[] = $val;
-        }
-
-        return $sortCategory;
+        return $this->sort($categories, $menu);
     }
 }

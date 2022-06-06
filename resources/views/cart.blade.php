@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('style')	
+@section('style')
 @endsection
 
 @section('script')
@@ -20,7 +20,7 @@
                 @if(session('positions'))
                     @foreach($positions as $position)
                     <div class="row border-bottom py-2 cart-info" id="{{$position->id}}">
-                        <div class="cart-img col-auto"><img src="{{$position->img}}"></div>
+                        <div class="cart-img col-auto"><img src="{{Storage::url($position->img)}}"></div>
                         <div class="col align-self-center fw-bold">{{$position->name}}</div>
                         <div class="col-auto align-self-center">
                             <button class="btn btn-dark btn-count btn-minus cart" id="{{$position->id}}">-</button>
@@ -30,7 +30,7 @@
                         <div class="pr-price col-auto align-self-center" id="{{$position->id}}">
                             {{session('positions')[$position->id]*$position->price}}
                         </div>
-                        
+
                     </div>
                     <script>
                     if(!prParam) var prParam = [];
@@ -40,7 +40,7 @@
                     }
                     </script>
                     @endforeach
-                
+
                 <div class="fs-3 fw-bold text-end">
                     Итого: <span class="pr-sum"></span>
                     <script>

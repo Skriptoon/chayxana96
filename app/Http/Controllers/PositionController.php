@@ -2,25 +2,37 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Contracts\Database;
 use \App\Models\Menu__position;
 use \App\Models\Menu__sort;
-use Illuminate\Support\Facades\DB;
 
 
 abstract class PositionController extends Controller {
 
-    public function get() {
+    protected string $modelPositions = '\App\Models\Menu__position';
+    protected string $modelSort = '\App\Models\Sort';
 
-        $positions = Menu__position::select();
+    protected function sort($positions, $menu = null) {
+        $sort = $this->modelSort::where('type', 'position')->first();
 
-        return $positions;
+        $sort = json_decode($sort->sort);
+
+        $sortPosition = [];
+        for($i = 0; $i < count($sort); $i++) {
+            for($k = 0; $k < count($sort[$i]); $k++) {
+                if(isset($positions[$sort[$i][$k]])) {
+                    $sortPosition[$i][] = $positions[$sort[$i][$k]];
+                }
+            }
+        }
+
+        foreach($positions as $key => $val) {
+            if(array_search($key, $sort[$val->menu - 1]) === false)
+                $sortPosition[$val->menu - 1][] = $val;
+        }
+
+        if(isset($menu))
+            return $sortPosition[$menu - 1];
+        return $sortPosition;
     }
-    
-    public function getSort() {
-        $sort = Menu__sort::where('type', 'position')->first();
-        
-        return $sort;
-    }
+
 }

@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\BanerController;
 
 use Illuminate\Http\Request;
 
@@ -35,29 +34,29 @@ Route::domain('admin.localhost')->group(function() {
     })->name('admin_position');
 
     Route::get('/сontacts', function () {
-        $contacts = new \App\Http\Controllers\PageController();
-        return view('admin.page', ['page' => $contacts->get('contacts')]);
+        $page = new \App\Http\Controllers\PageController();
+        return view('admin.page', ['page' => $page->get('contacts')]);
     })->name('admin_contacts');
 
     Route::get('/delivery', function () {
-        $contacts = new \App\Http\Controllers\PageController();
-        return view('admin.page', ['page' => $contacts->get('delivery')]);
+        $page = new \App\Http\Controllers\PageController();
+        return view('admin.page', ['page' => $page->get('delivery')]);
     })->name('admin_delivery');
 
     Route::get('/hall', function () {
-        $contacts = new \App\Http\Controllers\PageController();
-        return view('admin.page', ['page' => $contacts->get('hall')]);
+        $page = new \App\Http\Controllers\PageController();
+        return view('admin.page', ['page' => $page->get('hall')]);
     })->name('admin_hall');
 
     Route::get('/banners', function () {
-        $contacts = new \App\Http\Controllers\PageController();
-        return view('admin.contacts', ['baner' => $contacts->get('delivery')]);
+        $banners = new \App\Http\Controllers\BannerController();
+        return view('admin.banners', ['banners' => $banners->get()]);
     })->name('admin_banners');
 });
 
 Route::get('/', function() {
     $position = new App\Http\Controllers\PositionMenuController();
-    $banner = new BanerController();
+    $banner = new App\Http\Controllers\BannerController();
     return view('home', ['positions' => $position->get(), 'banners' => $banner->get()]);
 })->name('home');
 
@@ -70,7 +69,7 @@ Route::get('/cart', function() {
                 $positions[] = $posId;
         }
     }
-    return view('cart', ['positions' => $position->get()->whereIn('menu__positions.id', $positions)->get()]);
+    return view('cart', ['positions' => $position->getIN($positions)]);
 })->name('cart');
 
 Route::get('/delivery', function() {

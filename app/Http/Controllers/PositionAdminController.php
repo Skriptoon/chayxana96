@@ -9,38 +9,20 @@ use Illuminate\Support\Facades\DB;
 class PositionAdminController extends PositionController
 {
     public function get() {
-        $position = parent::get()->select(DB::raw('`menu__positions`.*, `menu__categories`.`menu`'))
+        $position = $this->modelPositions::select(DB::raw('`menu__positions`.*, `menu__categories`.`menu`'))
         ->join('menu__categories', 'menu__positions.id_category', '=', 'menu__categories.id')->get();
 
-        $sort = $this->getSort();
-        $sort = json_decode($sort->sort);
-
         $positions = [];
-        
-            foreach($position as $item) {
-                $positions[$item->id] = $item;
-            }
-        
-        
-        $sortPosition = [];
-        for($i = 0; $i < count($sort); $i++) {
-            for($k = 0; $k < count($sort[$i]); $k++) {
-                if(isset($positions[$sort[$i][$k]])) {
-                    $sortPosition[$i][] = $positions[$sort[$i][$k]];
-                } 
-            }
+
+        foreach($position as $item) {
+            $positions[$item->id] = $item;
         }
 
-        foreach($positions as $key => $val) {
-            if(array_search($key, $sort[$val->menu - 1]) === false)
-                $sortPosition[$val->menu - 1][] = $val;
-        }
-        
-        return $sortPosition;
+        return $this->sort($positions);
     }
 
     public function updateSort($request) {
-        $sort = \App\Models\menu__sort::updateOrInsert(
+        $sort = $this->modelSort::updateOrInsert(
             ['type' => 'position'],
             ['sort' => $request->sort]
         );
@@ -73,11 +55,11 @@ class PositionAdminController extends PositionController
             $path = $request->menu_img->store('images', 'public');
             $data['img'] = $path;
         }
-        
-        $sort = parent::get()->updateOrInsert(['id' => $request->id], $data);
+
+        $sort = $this->modelPositions::updateOrInsert(['id' => $request->id], $data);
     }
 
     public function delete(Request $request) {
-        $sort = parent::get()->where('id', $request->id)->delete();
+        $sort = $this->modelPositions::where('id', $request->id)->delete();
     }
 }

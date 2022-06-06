@@ -12,8 +12,8 @@ $("body").on("click", ".btn-inbusket", function() {
 		data: "amount=" + prParam[Number($(this).attr("id"))]["amount"] + "&id=" + Number($(this).attr("id")),
 		cache: false,
 		headers: {
-			'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-		}
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
 	});
 });
 
@@ -24,7 +24,7 @@ $("body").on("click", ".btn-minus", function() {
 		} else {
 			$(this).parent().html('<button class="btn btn-main btn-inbusket" id="' + Number($(this).attr("id")) + '">В корзину</button>');
 		}
-		
+
 	} else {
 		if($(this).hasClass('cart')) {
 			$("#" + $(this).attr("id") +".pr-amount").html(prParam[Number($(this).attr("id"))]["amount"] - 1);
@@ -67,7 +67,7 @@ $("body").on("click", ".btn-plus", function() {
 			'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
 		}
 	});
-	
+
 	if($(this).hasClass('cart')) {
 		updateSum();
 	} else {

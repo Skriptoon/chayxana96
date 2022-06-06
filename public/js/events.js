@@ -78,7 +78,7 @@ $("body").on("click", ".btn-plus", function() {
 $.mask.definitions['h'] = "[0|1|3|4|5|6|7|9]"
 $("input[type='tel']").mask("+7 (h99) 999-99-99");
 
-$("input[name='paydelivery'").click(function() {
+$("input[name='paydelivery']").click(function() {
 	if($(this).val() == 3)
 		$(".change").css("display", "flex");
 	else

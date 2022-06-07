@@ -5,6 +5,10 @@
     <script src="/js/jquery.ui.touch-punch.min.js"></script>
 @endsection
 
+@section('title')
+    Редактор позиций
+@endsection
+
 @section('content')
 <div class="container">
 	<h3>Позиции</h3>

@@ -52,7 +52,7 @@ class PositionAdminController extends PositionController
             'main_page' => $main_page];
 
         if($request->hasFile('menu_img')) {
-            $path = $request->menu_img->store('images', 'public');
+            $path = $request->menu_img->store('images/positions', 'public');
             $data['img'] = $path;
         }
 

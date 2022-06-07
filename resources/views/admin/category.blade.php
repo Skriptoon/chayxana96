@@ -75,9 +75,6 @@
     </script>
     @for($i = 0; $i < count($categories); $i++)
         @foreach ($categories[$i] as $category)
-            @php
-                $catSort[$category->id] = $category;
-            @endphp
             <script>
                 if(!category) var category = [];
                 category[{{$category->id}}] = {{ Illuminate\Support\Js::from($category) }};

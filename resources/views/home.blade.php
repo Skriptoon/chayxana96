@@ -19,7 +19,7 @@
 @endsection
 
 @section('title')
-    Главная
+    Чайхана#96. Пан-Азия. Мангал#1
 @endsection
 
 @section('content')
@@ -32,7 +32,7 @@
                     active
                 @endif
                 ">
-                <img src="{{$banner->img}}"></img>
+                <img src="{{Storage::url($banner->img)}}"></img>
                 <div class="carousel-caption d-none d-md-block">
                     <h5>{{$banner->header}}</h5>
                     <p>{{$banner->text}}</p>
